@@ -29,7 +29,7 @@ class Store {
         const newNote = {title, text, id:uniqid()}
         
         return this.getNotes()
-        .then((notes) => {[...notes, newNote]})
+        .then((notes) => [...notes, newNote])
         .then((updatedNotes) => {this.write(updatedNotes)})
         .then(() => {newNote})
     }
