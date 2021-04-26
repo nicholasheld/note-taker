@@ -2,15 +2,15 @@ const util = require('util');
 const fs = require('fs');
 const uniqid = require('uniqid');
 
-const readFileAsynch = util.promisify(fs.readFile);
-const writeFileAsynch = util.promisify(fs.writeFile);
+const readFileAsync = util.promisify(fs.readFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
 class Store {
     read() {
-        return readFileAsynch('db/db.json', 'utf8')
+        return readFileAsync('db/db.json', 'utf8')
     }
     write(note) {
-        return writeFileAsynch('db/db.json', JSON.stringify(note))
+        return writeFileAsync('db/db.json', JSON.stringify(note))
     }
     getNotes()  {
         return this.read().then((notes) => {
@@ -31,7 +31,7 @@ class Store {
         return this.getNotes()
         .then((notes) => {[...notes, newNote]})
         .then((updatedNotes) => {this.write(updatedNotes)})
-        .then(() => {newNote}) 
+        .then(() => {newNote})
     }
 }
 module.exports = new Store()
